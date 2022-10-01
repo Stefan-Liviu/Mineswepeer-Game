@@ -21,21 +21,24 @@ let time = setInterval(countTimer, 1000);
 let countSeconds = 0;
 
 function countTimer() {
-    ++countSeconds;
+    
+    if (startTime == true) {
+        ++countSeconds;
     let hour = Math.floor(countSeconds / 3600);
     let minute = Math.floor((countSeconds - hour * 3600) / 60);
     let seconds = countSeconds - (hour * 3600 + minute * 60);
 
-    if(hour < 10) {
+    if (hour < 10) {
         hour = "0"+hour;
     }
-    if(minute < 10) {
+    if (minute < 10) {
         minute = "0"+minute;
     }       
-    if(seconds < 10) {
+    if (seconds < 10) {
         seconds = "0"+seconds;
     }
     document.getElementById("timer").innerHTML = minute + ":" + seconds;
+    }    
 }
 
 window.onload = function() {      
@@ -84,7 +87,7 @@ function addBombs() {
         let y = Math.floor(Math.random() * cols);
         let id = x.toString() + "-" + y.toString();
 
-        if(!positionBombs.includes(id)) {
+        if (!positionBombs.includes(id)) {
             positionBombs.push(id);
             bombsLeft -= 1;
         }
@@ -93,13 +96,9 @@ function addBombs() {
 
 // click left to open tile
 function leftClick() {
-   
-    if (startTime == false) {
-       countTimer();
-       startTime = true;
-   }    
+    startTime = true;
     
-    if(gameOver || this.classList.contains("tileCliked")) {
+    if (gameOver || this.classList.contains("tileCliked")) {
         return;
     }
 
@@ -180,7 +179,3 @@ function checkTile(x, y) {
     }
     return 0;
 }
-
-
-
-
